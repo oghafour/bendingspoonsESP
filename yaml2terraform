@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+file_name=""
+base_dir_name=$1
+function testexecution() {
+for i in $base_dir_name/*.yaml;
+ do
+  echo -e "======================================================================================="
+  full_name=$i
+  file_name=$(basename ${full_name})
+  filename_no_ext="${file_name%.*}"
+   
+  python3 yamltoterraform.py $full_name $base_dir_name/$filename_no_ext.tf
+  echo -e "======================================================================================="
+ done
+}
+main() {
+   testexecution
+}
+main $@
